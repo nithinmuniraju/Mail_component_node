@@ -21,11 +21,9 @@ module.exports = {
                 text: subject,
                 html: text,
             };
-            transporter.sendMail(message, async (err, info) => {
-              
-            });
-        } catch (e) {
-            console.log('MailException::', e);
+            transporter.sendMail(message);
+        } catch (err) {
+            console.log('Exception-sendMail::', err);
         }
     },
 };

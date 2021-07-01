@@ -40,21 +40,26 @@ exports.sendMail = async (req, res, next) => {
             });
         }
    } catch(err) {
-    console.log(err);
+        console.log("Exception-sendMail::",err);
    } 
 }
 
 function getCommonCode(to, subject, body, datetime) {
-    if(to && to !== "")  {
-        const temp = scheduler.cronHandler(to, subject, body, datetime);
-        return {
-            success: false,
-            message: 'Mail has been Scheduled'
-        };
-    } else {
-        return {
-            success: false,
-            message: 'Please provide receiver email address'
-        };
+    try {
+        const scheduleMessage = !datetime ? "Sent" : "Scheduled"
+        if(to && to !== "")  {
+            const temp = scheduler.cronHandler(to, subject, body, datetime);
+            return {
+                success: false,
+                message: 'Mail has been '+scheduleMessage
+            };
+        } else {
+            return {
+                success: false,
+                message: 'Please provide receiver email address'
+            };
+        }
+    } catch (err) {
+        console.log("Exception-getCommonCode::",err);
     }
 }

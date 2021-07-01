@@ -29,7 +29,7 @@ const cronHandler = function(to, subject, body, schedule){
             });
         }
     } catch(err) {
-        console.log('ScheduleEmailException::', err);
+        console.log('Exception-cronHandler::', err);
     }
 }
 module.exports = {
